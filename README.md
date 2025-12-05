@@ -42,3 +42,5 @@ pytest
 ```
 
 This will discover and execute all tests under the `tests/` directory.
+
+* Nombre: Sergio Valdes Medina
