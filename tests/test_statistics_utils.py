@@ -47,13 +47,6 @@ class TestStatisticsUtils(unittest.TestCase):
         npt.assert_allclose(result, expected, rtol=1e-10, atol=1e-10)
 
     def test_moving_average_basic_case(self):
-        arr = [1, 2, 3, 4]
-        result = utils.moving_average(arr, window=2)
-
-        expected = np.array([1.5, 2.5, 3.5])
-        npt.assert_allclose(result, expected, rtol=1e-7, atol=1e-7)
-        self.assertEqual(result.shape, expected.shape)
-
         """Test que verifica que el método moving_average calcula correctamente la media móvil
         de una secuencia numérica para un caso básico.
         
@@ -63,9 +56,16 @@ class TestStatisticsUtils(unittest.TestCase):
         - Verificar que el resultado es correcto (ej: [1.5, 2.5, 3.5] para el array dado) (usar numpy.testing.assert_allclose() para comparar arrays de NumPy - esto es mejor que unittest porque maneja la comparación de arrays numéricos con tolerancia para errores de punto flotante)
         - Verificar que el resultado tiene la forma (shape) esperada (usar self.assertEqual para comparar tuplas de .shape - comparación simple, unittest es suficiente)
         """
+        utils = StatisticsUtils()
+        arr = [1, 2, 3, 4]
+        result = utils.moving_average(arr, window=2)
+
+        expected = np.array([1.5, 2.5, 3.5])
+        npt.assert_allclose(result, expected, rtol=1e-7, atol=1e-7)
+        self.assertEqual(result.shape, expected.shape)
 
     def test_moving_average_raises_for_invalid_window(self):
-                """Test que verifica que el método moving_average lanza un ValueError cuando
+        """Test que verifica que el método moving_average lanza un ValueError cuando
         se proporciona una ventana (window) inválida.
         
         Escenario esperado:
@@ -92,6 +92,11 @@ class TestStatisticsUtils(unittest.TestCase):
         - Crear una secuencia bidimensional (ej: [[1, 2], [3, 4]])
         - Llamar a moving_average con esa secuencia y verificar que se lanza un ValueError indicando que solo se aceptan secuencias 1D (usar self.assertRaises)
         """
+        utils = StatisticsUtils()
+        arr_2d = np.array([[1, 2], [3, 4]])
+
+        with self.assertRaises(ValueError):
+            utils.moving_average(arr_2d, window=2)
 
     def test_zscore_has_mean_zero_and_unit_std(self):
         """Test que verifica que el método zscore calcula correctamente los z-scores
