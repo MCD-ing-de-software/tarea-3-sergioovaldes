@@ -47,6 +47,13 @@ class TestStatisticsUtils(unittest.TestCase):
         npt.assert_allclose(result, expected, rtol=1e-10, atol=1e-10)
 
     def test_moving_average_basic_case(self):
+        arr = [1, 2, 3, 4]
+        result = utils.moving_average(arr, window=2)
+
+        expected = np.array([1.5, 2.5, 3.5])
+        npt.assert_allclose(result, expected, rtol=1e-7, atol=1e-7)
+        self.assertEqual(result.shape, expected.shape)
+
         """Test que verifica que el método moving_average calcula correctamente la media móvil
         de una secuencia numérica para un caso básico.
         
