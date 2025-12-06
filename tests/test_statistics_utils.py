@@ -77,7 +77,7 @@ class TestStatisticsUtils(unittest.TestCase):
         arr = [1, 2, 3]
 
         with self.assertRaises(ValueError):
-            uutils.moving_average(arr, window=0)
+            utils.moving_average(arr, window=0)
 
 
         with self.assertRaises(ValueError):
