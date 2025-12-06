@@ -129,6 +129,12 @@ class TestStatisticsUtils(unittest.TestCase):
         - Llamar a zscore con esa secuencia y verificar que se lanza un ValueError indicando que la desviación estándar es cero (usar self.assertRaises)
         """
 
+        utils = StatisticsUtils()
+        arr = [5, 5, 5]
+
+        with self.assertRaises(ValueError):
+            utils.zscore(arr)
+
     def test_min_max_scale_maps_to_zero_one_range(self):
         """Test que verifica que el método min_max_scale escala correctamente una secuencia
         numérica al rango [0, 1], donde el valor mínimo se mapea a 0 y el máximo a 1.
