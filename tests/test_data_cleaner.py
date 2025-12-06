@@ -203,6 +203,12 @@ class TestDataCleaner(unittest.TestCase):
         - Verificar que se lanza un TypeError (usar self.assertRaises)
         """
 
+        df = make_sample_df()
+        cleaner = DataCleaner()
+
+        with self.assertRaises(TypeError):
+            cleaner.remove_outliers_iqr(df, "city", factor=1.5)
+
 
 if __name__ == "__main__":
     unittest.main()
