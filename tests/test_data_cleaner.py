@@ -121,7 +121,6 @@ class TestDataCleaner(unittest.TestCase):
         - Verificar que en el DataFrame resultante los valores de "name" no tienen espacios al inicio/final (usar self.assertEqual para comparar valores específicos como strings individuales - unittest es suficiente)
         - Verificar que las columnas no especificadas (ej: "city") permanecen sin cambios (si comparas Series completas, usar pandas.testing.assert_series_equal() ya que maneja mejor los índices y tipos de Pandas; si comparas valores individuales, self.assertEqual es suficiente)
         """
-
         df = make_sample_df()
         cleaner = DataCleaner()
 
@@ -136,7 +135,7 @@ class TestDataCleaner(unittest.TestCase):
         self.assertEqual(result.loc[0, "name"], "Alice")
         self.assertEqual(result.loc[1, "name"], "Bob")
 
-        self.assertIsNone(result.loc[2, "name"]is None or pd.isna(result.loc[2, "name"]))
+        self.assertTrue(pd.isna(result.loc[2, "name"]))
         self.assertEqual(result.loc[3, "name"], "Carol")
 
         pdt.assert_series_equal(result["city"], original["city"])
